@@ -1,3 +1,3 @@
 fxHelmPublish(
-  chartName: 'azure_metrics_exporter'
+  chartName: 'azure-metrics-exporter'
 )
