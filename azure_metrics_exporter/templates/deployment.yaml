@@ -21,8 +21,8 @@ spec:
     spec:
       volumes:
       - name: config-volume
-        configMap:
-        name: {{ include "azure_metrics_exporter.name" . }}
+        secret:
+          secretName: {{ .Values.configuration_secret }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
