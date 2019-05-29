@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: {{ include "azure_metrics_exporter.fullname" . }}
   annotations:
-    prometheus.io/scrape: true
+    prometheus.io/scrape: "true"
   labels:
     app.kubernetes.io/name: {{ include "azure_metrics_exporter.name" . }}
     helm.sh/chart: {{ include "azure_metrics_exporter.chart" . }}
