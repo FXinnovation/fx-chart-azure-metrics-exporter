@@ -1,0 +1,67 @@
+replicaCount: 3
+
+image:
+  repository: fxinnovation/azure_metrics_exporter
+  tag: 0.1.0
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 10m
+    memory: 64Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+config:
+  active_directory_authority_url: "https://login.microsoftonline.com/"
+  resource_manager_url: "https://management.azure.com/"
+  credentials:
+    subscription_id: <secret>
+    client_id: <secret>
+    client_secret: <secret>
+    tenant_id: <secret>
+
+  targets:
+    - resource: "azure_resource_id"
+      metrics:
+      - name: "BytesReceived"
+      - name: "BytesSent"
+    - resource: "azure_resource_id"
+      aggregations:
+      - Minimum
+      - Maximum
+      - Average
+      metrics:
+      - name: "Http2xx"
+      - name: "Http5xx"
+
+  resource_groups:
+    - resource_group: "webapps"
+      resource_types:
+      - "Microsoft.Compute/virtualMachines"
+      resource_name_include_re:
+      - "testvm.*"
+      resource_name_exclude_re:
+      - "testvm12"
+      metrics:
+      - name: "CPU Credits Consumed"
+
+  resource_tags:
+    - resource_tag_name: "group"
+      resource_tag_value: "tomonitor"
+      metrics:
+      - name: "CPU Credits Consumed"
