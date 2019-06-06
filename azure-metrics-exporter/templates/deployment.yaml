@@ -7,7 +7,9 @@ metadata:
     helm.sh/chart: {{ include "azure_metrics_exporter.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
-{{ toYaml .Values.labels | indent 6 }}
+    {{- with .Values.labels }}
+{{ toYaml . | indent 4 }}
+    {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -19,7 +21,9 @@ spec:
       labels:
         app.kubernetes.io/name: {{ include "azure_metrics_exporter.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
-{{ toYaml .Values.labels | indent 10 }}
+    {{- with .Values.labels }}
+{{ toYaml . | indent 8 }}
+    {{- end }}
     spec:
       volumes:
       - name: config-volume
