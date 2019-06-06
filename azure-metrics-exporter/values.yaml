@@ -26,4 +26,6 @@ tolerations: []
 
 affinity: {}
 
+labels: {}
+
 configuration_secret: ''

@@ -9,6 +9,7 @@ metadata:
     helm.sh/chart: {{ include "azure_metrics_exporter.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{ toYaml .Values.labels | indent 6 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
