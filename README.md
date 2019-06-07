@@ -13,12 +13,10 @@ This chart deploys the azure-metrics-exporter for use with prometheus.
 | fullnameOverride | `''` | |
 | service.type | `'ClusterIP'` | Type of service to be used |
 | service.port | `80` | Service port to be used |
-| resources | ```limits:
-  cpu: 100m
-  memory: 128Mi
-requests:
-  cpu: 10m
-  memory: 64Mi``` | |
+| resources.limits.cpu | `100m` | |
+| resources.limits.memory | `128Mi` | |
+| resources.requests.cpu | `10m` | |
+| resources.requests.memory | `64Mi` | |
 | nodeSelector | `{}` | |
 | tolerations | `[]` | |
 | affinity | `{}` | |
