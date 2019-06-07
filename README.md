@@ -1,6 +1,8 @@
 # azure-metrics-exporter
 ## Description
-This chart deploys the azure-metrics-exporter for use with prometheus.
+This chart deploys the azure_metrics_exporter for use with prometheus.
+
+For more information about azure_metrics_exporter: https://github.com/RobustPerception/azure_metrics_exporter
 
 ## Values
 | Key | Default | Description |
