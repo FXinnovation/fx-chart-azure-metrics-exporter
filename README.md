@@ -21,8 +21,8 @@ This chart deploys the [azure_metrics_exporter](https://github.com/RobustPercept
 | tolerations | `[]` | scheduling tolerations |
 | affinity | `{}` | node and inter-pod affinity and ainti-affinity |
 | labels | `{}` | labels that will be added on all resources |
-| secret | `''` | secret in which are the credentials for azure_metrics_exporter |
-| configuration | `{}` | configuration under the yaml form for azure_metrics_exporter |
+| secret | `''` | secret in which are the credentials for azure_metrics_exporter. |
+| configuration | `{}` | configuration under the yaml form for azure_metrics_exporter, excepting credentials section. |
 
 ### secret
 Secret structure in kubernetes:
