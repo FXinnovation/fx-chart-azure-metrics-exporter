@@ -1,4 +1,4 @@
-replicaCount: 3
+replicaCount: 1
 
 image:
   repository: fxinnovation/azure_metrics_exporter
@@ -28,4 +28,6 @@ affinity: {}
 
 labels: {}
 
-configuration_secret: ''
+secret: ''
+
+configuration: {}

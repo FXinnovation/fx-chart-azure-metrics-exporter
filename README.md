@@ -1,8 +1,6 @@
 # azure-metrics-exporter
 ## Description
-This chart deploys the azure_metrics_exporter for use with prometheus.
-
-For more information about azure_metrics_exporter: https://github.com/RobustPerception/azure_metrics_exporter
+This chart deploys the [azure_metrics_exporter](https://github.com/RobustPerception/azure_metrics_exporter) for use with prometheus.
 
 ## Values
 | Key | Default | Description |
@@ -23,4 +21,14 @@ For more information about azure_metrics_exporter: https://github.com/RobustPerc
 | tolerations | `[]` | scheduling tolerations |
 | affinity | `{}` | node and inter-pod affinity and ainti-affinity |
 | labels | `{}` | labels that will be added on all resources |
-| configuration_secret | `` | configuration for azure_metrics_exporter |
+| secret | `''` | secret in which are the credentials for azure_metrics_exporter |
+| configuration | `{}` | configuration under the yaml form for azure_metrics_exporter |
+
+### secret
+Secret structure in kubernetes:
+```
+  subscription_id: <SUBSCRIPTION_ID>
+  client_id: <CLIENT_ID>
+  client_secret: <CLIENT_SECRET>
+  tenant_id: <TENANT_ID>
+```

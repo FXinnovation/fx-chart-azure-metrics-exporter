@@ -21,16 +21,66 @@ spec:
       labels:
         app.kubernetes.io/name: {{ include "azure_metrics_exporter.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
-    {{- with .Values.labels }}
+{{- with .Values.labels }}
 {{ toYaml . | indent 8 }}
-    {{- end }}
+{{- end }}
     spec:
       volumes:
-      - name: config-volume
-        secret:
-          secretName: {{ .Values.configuration_secret }}
+        - name: config-volume
+          emptyDir: {}
+        - name: confd-templates
+          configMap:
+            name: {{ include "azure_metrics_exporter.fullname" . }}
+            items:
+              - key: azure.yml.tmpl
+                path: azure.yml.tmpl
+        - name: confd-config
+          configMap:
+            name: {{ include "azure_metrics_exporter.fullname" . }}
+            items:
+              - key: azure.toml
+                path: azure.toml
+        - name: confd-sources
+          configMap:
+            name: {{ include "azure_metrics_exporter.fullname" . }}
+            items:
+              - key: configuration.yaml
+                path: configuration.yaml
+      initContainers:
+        - name: confd
+          image: fxinnovation/confd:0.1.0
+          volumeMounts:
+            - name: config-volume
+              mountPath: /data
+            - name: confd-config
+              mountPath: /etc/confd/conf.d
+            - name: confd-sources
+              mountPath: /etc/confd/sources
+            - name: confd-templates
+              mountPath: /etc/confd/templates
+          env:
+            - name: subscription_id
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret }}
+                  key: subscription_id
+            - name: client_id
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret }}
+                  key: client_id
+            - name: tenant_id
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret }}
+                  key: tenant_id
+            - name: client_secret
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret }}
+                  key: client_secret
       containers:
-        - name: {{ .Chart.Name }}
+        - name: azure_metrics_exporter
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
