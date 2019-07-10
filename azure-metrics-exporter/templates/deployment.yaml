@@ -80,7 +80,7 @@ spec:
                   name: {{ .Values.secret }}
                   key: client_secret
       containers:
-        - name: azure_metrics_exporter
+        - name: azure-metrics-exporter
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
