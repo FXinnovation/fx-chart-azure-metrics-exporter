@@ -52,7 +52,7 @@ spec:
           args:
             - '-onetime'
             - '-backend=file'
-            - '-file=/data/configuration.yaml'
+            - '-file=/etc/confd/sources/configuration.yaml'
           volumeMounts:
             - name: config-volume
               mountPath: /data
