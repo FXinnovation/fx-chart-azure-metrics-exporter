@@ -49,6 +49,10 @@ spec:
       initContainers:
         - name: confd
           image: fxinnovation/confd:0.1.0
+          args:
+            - '-onetime'
+            - '-backend=file'
+            - '-file=/data/configuration.yaml'
           volumeMounts:
             - name: config-volume
               mountPath: /data
