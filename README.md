@@ -7,7 +7,7 @@ This chart deploys the [azure_metrics_exporter](https://github.com/RobustPercept
 | --- | ------- | ----------- |
 | replicaCount | `3` | Number of replicas |
 | image.repository | `'fxinnovation/azure_metrics_exporter'` | Repository of the docker image to be used |
-| image.tag | `'0.1.0'` | Tag of the docker image to be used |
+| image.tag | `'0.5.0'` | Tag of the docker image to be used |
 | image.pullPolicy | `'IfNotPresent'` | Pull policy of the image to be used |
 | nameOverride | `''` | overrides the name of the chart |
 | fullnameOverride | `''` | overrides the full name of the chart |
