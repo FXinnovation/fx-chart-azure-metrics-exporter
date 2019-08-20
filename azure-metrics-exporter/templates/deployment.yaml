@@ -17,9 +17,9 @@ spec:
       app.kubernetes.io/name: {{ include "azure_metrics_exporter.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
-    annotations:
-      checksum/config: {{ toYaml .Values.configuration | sha256sum }}
     metadata:
+      annotations:
+        checksum/config: {{ toYaml .Values.configuration | sha256sum }}
       labels:
         app.kubernetes.io/name: {{ include "azure_metrics_exporter.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
